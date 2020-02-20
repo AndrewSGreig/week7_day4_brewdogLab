@@ -1,9 +1,14 @@
 <template lang="html">
   <div id="beerList">
     <p> In Beer List </p>
-    {{beers}}
+    <!-- {{beers}} -->
     <ul>
-      <li v-for="(beer, index) in beers"  :key="index" ></li>
+      <li v-for="(beer, index) in beers"  :key="index" >
+        {{beer.name}}
+<div id="right">
+        <img :src="beer.image_url" :alt="beer.name">
+</div>
+      </li>
     </ul>
   </div>
 </template>
@@ -17,4 +22,7 @@
 </script>
 
 <style lang="css" scoped>
+#right img {
+  width: 5%;
+}
 </style>
