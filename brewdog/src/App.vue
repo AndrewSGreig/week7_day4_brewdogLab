@@ -2,16 +2,20 @@
   <div id="app">
     <h1>Brewdog Beers </h1>
     <beer-list :beers="beers"></beer-list>
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <beer-details :beers="selectedBeer"></beer-details>
+
+    <!-- <h2>Favourite Beers</h2>
+    <ul v-for="beer in faveBeers">
+      <li>{{beer}}</li>
+    </ul> -->
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import BeerList from './components/BeerList.vue'
 import { eventBus } from './main.js'
-
+import BeerDetails from './components/BeerDetails.vue'
+// import FaveBeers from './components/FaveBeers.vue'
 
 export default {
   name: 'App',
@@ -22,17 +26,19 @@ export default {
     }
   },
   components: {
-    // HelloWorld
-    "beer-list": BeerList
+    "beer-list": BeerList,
+    "beer-details": BeerDetails,
+    // "fave-beer": FaveBeers
+
   },
   mounted(){
     fetch('https://api.punkapi.com/v2/beers')
     .then(res => res.json())
-    //.then(console.log(res))
     .then(beers => this.beers = beers)
 
     eventBus.$on('beer-selected', (beer) => {
       this.selectedBeer = beer
+
     })
   }
 }

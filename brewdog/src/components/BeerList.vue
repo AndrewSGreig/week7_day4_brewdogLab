@@ -1,28 +1,26 @@
 <template lang="html">
   <div id="beerList">
-    <p> In Beer List </p>
-    <!-- {{beers}} -->
     <ul>
-      <li v-for="(beer, index) in beers"  :key="index" >
-        {{beer.name}}
-<div id="right">
-        <img :src="beer.image_url" :alt="beer.name">
-</div>
-      </li>
+      <beer-item  v-for="(beer, index) in beers" :beer="beer" :key="index"></beer-item>
+
     </ul>
+
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'beer-list',
-    props: ['beers']
-
+import { eventBus } from '../main.js'
+import BeerItem from './BeerItem.vue'
+export default {
+  name: 'beer-list',
+  props: ['beers'],
+  components: {
+    "beer-item": BeerItem
   }
+  }
+
 </script>
 
 <style lang="css" scoped>
-#right img {
-  width: 5%;
-}
+
 </style>
